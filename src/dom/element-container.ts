@@ -20,9 +20,15 @@ export class ElementContainer {
         this.styles = new CSSParsedDeclaration(window.getComputedStyle(element, null));
         this.textNodes = [];
         this.elements = [];
-        if (this.styles.transform !== null && isHTMLElementNode(element)) {
-            // getBoundingClientRect takes transforms into account
+        if (this.styles.transform != null && isHTMLElementNode(element)) {
+            // getBoundingClientRect takes transforms & transitions into account
             element.style.transform = 'none';
+        }
+        const {animationDuration, transitionDuration} = this.styles;
+        const style = (element as HTMLElement).style;
+        if (style && (animationDuration || transitionDuration)) {
+            style.animationDuration = '0ms';
+            style.transitionDuration = '0ms';
         }
         this.bounds = parseBounds(element);
         this.flags = 0;
