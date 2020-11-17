@@ -142,6 +142,7 @@ export class CanvasRenderer {
 
     renderTextWithLetterSpacing(text: TextBounds, letterSpacing: number) {
         if (letterSpacing === 0) {
+            this.ctx.textBaseline = 'ideographic';
             this.ctx.fillText(text.text, text.bounds.left, text.bounds.top + text.bounds.height);
         } else {
             const letters = toCodePoints(text.text).map(i => fromCodePoint(i));
