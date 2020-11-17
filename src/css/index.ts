@@ -55,7 +55,6 @@ import {zIndex} from './property-descriptors/z-index';
 import {CSSValue, isIdentToken, Parser} from './syntax/parser';
 import {Tokenizer} from './syntax/tokenizer';
 import {Color, color as colorType, isTransparent} from './types/color';
-import {duration as durationType} from './types/duration';
 import {angle} from './types/angle';
 import {image} from './types/image';
 import {opacity} from './property-descriptors/opacity';
@@ -294,8 +293,6 @@ const parse = (descriptor: CSSPropertyDescriptor<any>, style?: string | null) =>
                 case 'length-percentage':
                     const value = parser.parseComponentValue();
                     return isLengthPercentage(value) ? value : ZERO_LENGTH;
-                case 'duration':
-                    return durationType.parse(parser.parseComponentValue());
             }
     }
 };
